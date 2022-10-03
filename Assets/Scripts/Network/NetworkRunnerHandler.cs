@@ -28,7 +28,7 @@ public class NetworkRunnerHandler : MonoBehaviour
 
     public void StartHostMigration(HostMigrationToken hostMigrationToken)
     {
-        //Create a new Network runner, old one is being shut down
+        // Create a new Network runner, old one is being shut down
         networkRunner = Instantiate(networkRunnerPrefab);
         networkRunner.name = "Network runner - Migrated";
 
@@ -43,7 +43,7 @@ public class NetworkRunnerHandler : MonoBehaviour
 
         if (sceneManager == null)
         {
-            //Handle networked objects that already exits in the scene
+            // Handle networked objects that already exits in the scene
             sceneManager = runner.gameObject.AddComponent<NetworkSceneManagerDefault>();
         }
 
@@ -76,11 +76,11 @@ public class NetworkRunnerHandler : MonoBehaviour
 
         return runner.StartGame(new StartGameArgs
         {
-            //GameMode = gameMode,  // ignored, Game Mode comes with the HostMigrationToken
-            //Address = address,
-            //Scene = scene,
-            //SessionName = "TestRoom",
-            //Initialized = initialized,
+            // GameMode = gameMode,  // ignored, Game Mode comes with the HostMigrationToken
+            // Address = address,
+            // Scene = scene,
+            // SessionName = "TestRoom",
+            // Initialized = initialized,
             SceneManager = sceneManager,
             HostMigrationToken = hostMigrationToken, // contains all necessary info to restart the Runner
             HostMigrationResume = HostMigrationResume, // this will be invoked to resume the simulation
@@ -111,7 +111,7 @@ public class NetworkRunnerHandler : MonoBehaviour
                         newHPHandler.skipSettingStartValues = true;
                     }
 
-                    //Map the connection token with the new Network player
+                    // Map the connection token with the new Network player
                     if (resumeNetworkObject.TryGetBehaviour<NetworkPlayer>(out var oldNetworkPlayer))
                     {
                         // Store Player token for reconnection
