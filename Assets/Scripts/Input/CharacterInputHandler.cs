@@ -27,7 +27,7 @@ public class CharacterInputHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start ()
     {
-        CursorLock(cursorLocked);
+        CursorLock(true);
     }
 
     // Update is called once per frame
@@ -36,9 +36,7 @@ public class CharacterInputHandler : MonoBehaviour
 
         // Show or not cursor
         if (Input.GetKeyDown(KeyCode.T)) {
-            cursorLocked = !cursorLocked;
-
-            CursorLock(cursorLocked);
+            CursorLock(!cursorLocked);
         }
 
         if (!characterMovementHandler.Object.HasInputAuthority || !cursorLocked) {
@@ -129,12 +127,23 @@ public class CharacterInputHandler : MonoBehaviour
     /// <param name="locked"></param>
     public void CursorLock (bool locked)
     {
+        cursorLocked = locked;
+
         if (locked) {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         } else {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+        }
+    }
+
+    private void OnApplicationFocus (bool focus)
+    {
+        if (!focus) {
+            CursorLock (false);
+        } else {
+            CursorLock (true);
         }
     }
 }

@@ -76,15 +76,15 @@ MonoBehaviour:
   DisconnectAfterKeepAlive: 0
   KeepAliveInBackground: 60000
   ApplyDontDestroyOnLoad: 1
-  logLevel: 3
+  logLevel: 2
   enableSupportLogger: 0
   updateInterval: 50
   runInBackground: 1
   statsResetInterval: 1000
   speakerPrefab: {fileID: 0}
   primaryRecorder: {fileID: 2189356620132052259}
-  globalRecordersLogLevel: 3
-  globalSpeakersLogLevel: 3
+  globalRecordersLogLevel: 2
+  globalSpeakersLogLevel: 2
   globalPlaybackDelay: -1
   globalPlaybackDelaySettings:
     MinDelaySoft: 200
