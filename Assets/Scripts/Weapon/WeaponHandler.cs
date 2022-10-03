@@ -22,14 +22,17 @@ public class WeaponHandler : NetworkBehaviour
     [Networked(OnChanged = nameof(OnFireChanged))]
     public bool isFiring { get; set; }
 
+    [Networked(OnChanged = nameof(OnWeaponChanged))]
+    public bool hasWeapon { get; set; }
+
 
     float lastTimeFired = 0;
 
-    //Timing
+    // Timing
     TickTimer grenadeFireDelay = TickTimer.None;
     TickTimer rocketFireDelay = TickTimer.None;
 
-    //Other components
+    // Other components
     HPHandler hpHandler;
     NetworkPlayer networkPlayer;
     NetworkObject networkObject;
@@ -41,18 +44,12 @@ public class WeaponHandler : NetworkBehaviour
         networkObject = GetComponent<NetworkObject>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public override void FixedUpdateNetwork()
     {
-        if (hpHandler.isDead)
+        if (hpHandler.isDead || hasWeapon)
             return;
 
-        //Get the input from the network
+        // Get the input from the network
         if (GetInput(out NetworkInputData networkInputData))
         {
             if (networkInputData.isFireButtonPressed)
@@ -68,7 +65,7 @@ public class WeaponHandler : NetworkBehaviour
 
     void Fire(Vector3 aimForwardVector)
     {
-        //Limit fire rate
+        // Limit fire rate
         if (Time.time - lastTimeFired < 0.15f)
             return;
 
@@ -97,7 +94,7 @@ public class WeaponHandler : NetworkBehaviour
             Debug.Log($"{Time.time} {transform.name} hit PhysX collider {hitinfo.Collider.transform.name}");
         }
 
-        //Debug
+        // Debug
         if (isHitOtherPlayer)
             Debug.DrawRay(aimPoint.position, aimForwardVector * hitDistance, Color.red, 1);
         else Debug.DrawRay(aimPoint.position, aimForwardVector * hitDistance, Color.green, 1);
@@ -107,7 +104,7 @@ public class WeaponHandler : NetworkBehaviour
 
     void FireGrenade(Vector3 aimForwardVector)
     {
-        //Check that we have not recently fired a grenade. 
+        // Check that we have not recently fired a grenade. 
         if (grenadeFireDelay.ExpiredOrNotRunning(Runner))
         {
             Runner.Spawn(grenadePrefab, aimPoint.position + aimForwardVector * 1.5f, Quaternion.LookRotation(aimForwardVector), Object.InputAuthority, (runner, spawnedGrenade) =>
@@ -115,14 +112,14 @@ public class WeaponHandler : NetworkBehaviour
                 spawnedGrenade.GetComponent<GrenadeHandler>().Throw(aimForwardVector * 15, Object.InputAuthority, networkPlayer.nickName.ToString());
             });
 
-            //Start a new timer to avoid grenade spamming
+            // Start a new timer to avoid grenade spamming
             grenadeFireDelay = TickTimer.CreateFromSeconds(Runner, 1.0f);
         }
     }
 
     void FireRocket(Vector3 aimForwardVector)
     {
-        //Check that we have not recently fired a grenade. 
+        // Check that we have not recently fired a grenade. 
         if (rocketFireDelay.ExpiredOrNotRunning(Runner))
         {
             Runner.Spawn(rocketPrefab, aimPoint.position + aimForwardVector * 1.5f, Quaternion.LookRotation(aimForwardVector), Object.InputAuthority, (runner, spawnedRocket) =>
@@ -130,7 +127,7 @@ public class WeaponHandler : NetworkBehaviour
                 spawnedRocket.GetComponent<RocketHandler>().Fire(Object.InputAuthority, networkObject,  networkPlayer.nickName.ToString());
             });
 
-            //Start a new timer to avoid grenade spamming
+            // Start a new timer to avoid grenade spamming
             rocketFireDelay = TickTimer.CreateFromSeconds(Runner, 3.0f);
         }
     }
@@ -153,7 +150,7 @@ public class WeaponHandler : NetworkBehaviour
 
         bool isFiringCurrent = changed.Behaviour.isFiring;
 
-        //Load the old value
+        // Load the old value
         changed.LoadOld();
 
         bool isFiringOld = changed.Behaviour.isFiring;
@@ -167,5 +164,21 @@ public class WeaponHandler : NetworkBehaviour
     {
         if (!Object.HasInputAuthority)
             fireParticleSystem.Play();
+    }
+
+    static void OnWeaponChanged (Changed<WeaponHandler> changed)
+    {
+        //Debug.Log($"{Time.time} OnFireChanged value {changed.Behaviour.isFiring}");
+
+        bool hasWeaponCurrent = changed.Behaviour.hasWeapon;
+
+        // Load the old value
+        changed.LoadOld ();
+
+        bool hasWeaponOld = changed.Behaviour.hasWeapon;
+
+        if (hasWeaponCurrent && !hasWeaponOld)
+            changed.Behaviour.hasWeapon = hasWeaponCurrent;
+
     }
 }
