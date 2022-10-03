@@ -80,7 +80,7 @@ namespace Photon.Chat.Demo
         private readonly Dictionary<string,FriendItem> friendListItemLUT =  new Dictionary<string, FriendItem>();
 
         public bool ShowState = true;
-        public GameObject Title;
+        //public GameObject Title;
         public Text StateText; // set in inspector
         public Text UserIdText; // set in inspector
 
@@ -126,7 +126,7 @@ namespace Photon.Chat.Demo
             this.StateText.text  = "";
             this.StateText.gameObject.SetActive(true);
             this.UserIdText.gameObject.SetActive(true);
-            this.Title.SetActive(true);
+            //this.Title.SetActive(true);
             this.ChatPanel.gameObject.SetActive(false);
             this.ConnectingLabel.SetActive(false);
 

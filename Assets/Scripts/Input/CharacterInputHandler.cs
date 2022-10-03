@@ -35,7 +35,7 @@ public class CharacterInputHandler : MonoBehaviour
     { 
 
         // Show or not cursor
-        if (Input.GetKeyDown(KeyCode.T)) {
+        if (Input.GetKeyDown(KeyCode.Tab)) {
             CursorLock(!cursorLocked);
         }
 
