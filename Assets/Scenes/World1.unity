@@ -1231,7 +1231,7 @@ MonoBehaviour:
   chatAppSettings:
     AppIdChat: ae50b44e-9dbe-4ea1-a077-aad501454f86
     AppVersion: 
-    FixedRegion: 
+    FixedRegion: eu
     Server: 
     Port: 0
     ProxyServer: 
@@ -5840,10 +5840,10 @@ MonoBehaviour:
     The script IgnoreUiRaycastWhenInactive keeps inactive
     panels from blocking input.
 
-    
 
-    All users should use a UserId (to be
-    found as friend).
+
+    All users should use a UserId (to be found
+    as friend).
 
     This message will go away at runtime.'
 --- !u!222 &915497949
