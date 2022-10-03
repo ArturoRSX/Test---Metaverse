@@ -15,24 +15,53 @@ public class CharacterInputHandler : MonoBehaviour
     LocalCameraHandler localCameraHandler;
     CharacterMovementHandler characterMovementHandler;
 
-    private void Awake()
+    // Cursor is locked?
+    bool cursorLocked = true;
+
+    private void Awake ()
     {
-        localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
-        characterMovementHandler = GetComponent<CharacterMovementHandler>();
+        localCameraHandler = GetComponentInChildren<LocalCameraHandler> ();
+        characterMovementHandler = GetComponent<CharacterMovementHandler> ();
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Start ()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        CursorLock(cursorLocked);
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (!characterMovementHandler.Object.HasInputAuthority)
+    void Update () 
+    { 
+
+        // Show or not cursor
+        if (Input.GetKeyDown(KeyCode.T)) {
+            cursorLocked = !cursorLocked;
+
+            CursorLock(cursorLocked);
+        }
+
+        if (!characterMovementHandler.Object.HasInputAuthority || !cursorLocked) {
+            // Reset all inputs
+
+            viewInputVector.x = 0;
+            viewInputVector.y = 0;
+
+            moveInputVector.x = 0;
+            moveInputVector.y = 0;
+
+            isJumpButtonPressed = false;
+
+            isFireButtonPressed = false;
+
+            isRocketLauncherFireButtonPressed = false;
+
+            isGrenadeFireButtonPressed = false;
+
+            localCameraHandler.SetViewInputVector (viewInputVector);
+
             return;
+        }
 
         //View input
         viewInputVector.x = Input.GetAxis("Mouse X");
@@ -92,5 +121,20 @@ public class CharacterInputHandler : MonoBehaviour
         isRocketLauncherFireButtonPressed = false;
 
         return networkInputData;
+    }
+
+    /// <summary>
+    /// Locks or unlock the cursor
+    /// </summary>
+    /// <param name="locked"></param>
+    public void CursorLock (bool locked)
+    {
+        if (locked) {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        } else {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }
