@@ -4,7 +4,7 @@ This a Metaverse example for Sumeru Inc.
 Created with
 Unity – 2021.3.3f1
 
-Full Architecture PDF
+Full Architecture PDF are inside the Assets folder
 
 Assets
 Multiplayer SDK
