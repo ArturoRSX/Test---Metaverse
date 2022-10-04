@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf7219bab7fe46a1ad266029b2fee19, type: 3}
+  m_Name: Readme
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2800000, guid: 7b0ad8aa8e43de541bb92b5db8452d48, type: 3}
+  iconMaxWidth: 192
+  title: The metaverse
+  sections:
+  - heading: Carlos Arturo Rodriguez Silva
+    text: "Created with Unity \u2013 2021.3.3f1"
+    linkText: Github
+    url: https://github.com/ArturoRSX/Test---Metaverse
+  - heading: 
+    text: Assets Multiplayer SDK
+    linkText: 
+    url: 
+  - heading: 
+    text: "\u2022 Photon Fusion: High performance, low bandwidth, a lot of built-in
+      features."
+    linkText: 
+    url: 
+  - heading: 
+    text: "\u2022 Photon Chat: solution to build a scalable chat."
+    linkText: 
+    url: 
+  - heading: 
+    text: "\u2022 Photon Voice: cross platform, allows to attach an audio source
+      to a 3D object in Unity so you can freely place the audio streams, e.g., in
+      a virtual world or an FPS"
+    linkText: 
+    url: 
+  - heading: 
+    text: More info in the PDF file
+    linkText: 
+    url: 
+  loadedLayout: 1

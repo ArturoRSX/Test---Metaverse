@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Startup
 {
+    /// <summary>
+    /// Instantiate objects before the load scene
+    /// </summary>
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void InstantiatePrefabs()
     {

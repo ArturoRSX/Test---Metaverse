@@ -161,6 +161,7 @@ namespace Photon.Chat.Demo
             this.chatClient.ConnectUsingSettings(this.chatAppSettings);
 
             this.ChannelToggleToInstantiate.gameObject.SetActive(false);
+
             Debug.Log("Connecting as: " + this.UserName);
 
             this.ConnectingLabel.SetActive(true);

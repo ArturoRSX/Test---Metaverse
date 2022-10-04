@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
-public struct NetworkInputData : INetworkInput
+namespace Metaverse.Character
 {
-    public Vector2 movementInput;
-    public Vector3 aimForwardVector;
-    public NetworkBool isJumpPressed;
-    public NetworkBool isFireButtonPressed;
-    public NetworkBool isGrenadeFireButtonPressed;
-    public NetworkBool isRocketLauncherFireButtonPressed;
+    /// <summary>
+    /// Network input data
+    /// </summary>
+    public struct NetworkInputData : INetworkInput
+    {
+        public Vector2 movementInput;
+        public Vector3 aimForwardVector;
+        public NetworkBool isJumpPressed;
+        public NetworkBool isFireButtonPressed;
+        public NetworkBool isGrenadeFireButtonPressed;
+        public NetworkBool isRocketLauncherFireButtonPressed;
+    }
 }

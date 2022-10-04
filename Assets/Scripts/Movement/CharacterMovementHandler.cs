@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using Metaverse.Utilities;
+using Metaverse.Character;
 
 namespace Metaverse.Game
 {
@@ -10,7 +11,7 @@ namespace Metaverse.Game
     {
         bool isRespawnRequested = false;
 
-        //Other components
+        // Other components
         NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
         HPHandler hpHandler;
         NetworkInGameMessages networkInGameMessages;
@@ -32,32 +33,32 @@ namespace Metaverse.Game
                     return;
                 }
 
-                //Don't update the clients position when they are dead
+                // Don't update the clients position when they are dead
                 if (hpHandler.isDead)
                     return;
             }
 
-            //Get the input from the network
+            // Get the input from the network
             if (GetInput (out NetworkInputData networkInputData)) {
-                //Rotate the transform according to the client aim vector
+                // Rotate the transform according to the client aim vector
                 transform.forward = networkInputData.aimForwardVector;
 
-                //Cancel out rotation on X axis as we don't want our character to tilt
+                // Cancel out rotation on X axis as we don't want our character to tilt
                 Quaternion rotation = transform.rotation;
                 rotation.eulerAngles = new Vector3 (0, rotation.eulerAngles.y, rotation.eulerAngles.z);
                 transform.rotation = rotation;
 
-                //Move
+                // Move
                 Vector3 moveDirection = transform.forward * networkInputData.movementInput.y + transform.right * networkInputData.movementInput.x;
                 moveDirection.Normalize ();
 
                 networkCharacterControllerPrototypeCustom.Move (moveDirection);
 
-                //Jump
+                // Jump
                 if (networkInputData.isJumpPressed)
                     networkCharacterControllerPrototypeCustom.Jump ();
 
-                //Check if we've fallen off the world.
+                // Check if we've fallen off the world.
                 CheckFallRespawn ();
             }
 
