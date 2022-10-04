@@ -2,27 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class Utils
+namespace Metaverse.Utilities
 {
-    public static Vector3 GetRandomSpawnPoint()
+    public static class Utils
     {
-        var spawnPoints = GameObject.FindGameObjectsWithTag ("SpawnPoint");
-        if (spawnPoints != null) {
-            return spawnPoints [Random.Range (0, spawnPoints.Length - 1)].transform.position;
-        }
-        else {
-            return new Vector3 (Random.Range (-20, 20), 4, Random.Range (-20, 20));
-        }
-    }
-
-    public static void SetRenderLayerInChildren(Transform transform, int layerNumber)
-    {
-        foreach (Transform trans in transform.GetComponentsInChildren<Transform>(true))
+        public static Transform GetRandomSpawnPoint ()
         {
-            if (trans.CompareTag("IgnoreLayerChange"))
-                continue;
+            // Get an array of the spawn points
+            var spawnPoints = GameObject.FindGameObjectsWithTag ("SpawnPoint");
 
-            trans.gameObject.layer = layerNumber;
+            // Spawn randomly in one of the spawn points
+            if (spawnPoints != null) {
+                return spawnPoints [Random.Range (0, spawnPoints.Length - 1)].transform;
+            }
+            else {
+                Debug.LogError ("No spawn points assigned in the world");
+                return null;
+            }
+        }
+
+        public static void SetRenderLayerInChildren (Transform transform, int layerNumber)
+        {
+            foreach (Transform trans in transform.GetComponentsInChildren<Transform> (true)) {
+                if (trans.CompareTag ("IgnoreLayerChange"))
+                    continue;
+
+                trans.gameObject.layer = layerNumber;
+            }
         }
     }
 }

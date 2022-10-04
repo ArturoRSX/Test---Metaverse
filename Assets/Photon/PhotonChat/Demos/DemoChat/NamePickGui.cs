@@ -5,6 +5,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 
+using Metaverse;
+using Metaverse.Character;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +16,7 @@ namespace Photon.Chat.Demo
     [RequireComponent(typeof(ChatGui))]
     public class NamePickGui : MonoBehaviour
     {
-        private const string UserNamePlayerPref = "NamePickUserName";
+        private const string UserNamePlayerPref = "PlayerNickname";
 
         public ChatGui chatNewComponent;
 
@@ -23,7 +25,6 @@ namespace Photon.Chat.Demo
         public void Start()
         {
             this.chatNewComponent = FindObjectOfType<ChatGui>();
-
 
             string prefsName = PlayerPrefs.GetString(UserNamePlayerPref);
             if (!string.IsNullOrEmpty(prefsName))
@@ -44,12 +45,24 @@ namespace Photon.Chat.Demo
 
         public void StartChat()
         {
-            ChatGui chatNewComponent = FindObjectOfType<ChatGui>();
-            chatNewComponent.UserName = this.idInput.text.Trim();
-            chatNewComponent.Connect();
-            this.enabled = false;
+            // Trim name
+            var idInputTrim = idInput.text.Trim ();
 
-            PlayerPrefs.SetString(UserNamePlayerPref, chatNewComponent.UserName);
+            // Save name
+            PlayerPrefs.SetString ("PlayerNickname", idInputTrim);
+            PlayerPrefs.Save ();
+
+            // Set in Game Manager
+            GameManager.instance.playerNickName = idInputTrim;
+
+            ChatGui chatNewComponent = FindObjectOfType<ChatGui>();
+            chatNewComponent.UserName = idInputTrim;
+            chatNewComponent.Connect();
+
+            NetworkRunnerHandler networkRunnerHandler = FindObjectOfType<NetworkRunnerHandler> ();
+            networkRunnerHandler.StartNow ();
+
+            this.enabled = false;
         }
     }
 }

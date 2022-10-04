@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 346034651940963266}
   m_Layer: 6
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: IgnoreLayerChange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -587,7 +587,7 @@ GameObject:
   - component: {fileID: 4985779429485557398}
   m_Layer: 0
   m_Name: NetworkPlayer PF
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -642,6 +642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
   playerNickNameTM: {fileID: 7319436505145594861}
+  isLocal: 1
   playerModel: {fileID: 8054853945983303956}
   _nickName:
     _length: 0
@@ -762,6 +763,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 129
   _isFiring: 0
+  _hasWeapon: 0
 --- !u!114 &1852728354347325528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -795,10 +797,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
   _isDead: 0
-  uiOnHitColor: {r: 0.8962264, g: 0.2747864, b: 0.2747864, a: 0.9411765}
+  uiOnHitColor: {r: 0.8962264, g: 0.2747864, b: 0.2747864, a: 0.29411766}
   uiOnHitImage: {fileID: 3971609654798122313}
   bodyMeshRenderer: {fileID: 5378213703285569550}
   playerModel: {fileID: 6860565821398973337}
+  weapon: {fileID: 920324873148010940}
   deathGameObjectPrefab: {fileID: 4817986840635846212, guid: cee29fc4fd375c44588dfd4c0b0689d1, type: 3}
   skipSettingStartValues: 0
 --- !u!114 &4985779429485557398
@@ -1343,6 +1346,11 @@ PrefabInstance:
 --- !u!198 &670099464081310014 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 2634062280194960951, guid: fc9c47ef068abce44afbb23a75a3d1c0, type: 3}
+  m_PrefabInstance: {fileID: 3297402771153202953}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &920324873148010940 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2379902543376957109, guid: fc9c47ef068abce44afbb23a75a3d1c0, type: 3}
   m_PrefabInstance: {fileID: 3297402771153202953}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2937585060775518698 stripped

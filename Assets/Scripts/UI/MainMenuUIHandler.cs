@@ -4,25 +4,29 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class MainMenuUIHandler : MonoBehaviour
+namespace Metaverse
 {
-    public TMP_InputField inputField;
 
-    // Start is called before the first frame update
-    void Start()
+    public class MainMenuUIHandler : MonoBehaviour
     {
-        if (PlayerPrefs.HasKey("PlayerNickname"))
-            inputField.text = PlayerPrefs.GetString("PlayerNickname");
+        public TMP_InputField inputField;
+
+        // Start is called before the first frame update
+        void Start ()
+        {
+            if (PlayerPrefs.HasKey ("PlayerNickname"))
+                inputField.text = PlayerPrefs.GetString ("PlayerNickname");
+        }
+
+        public void OnJoinGameClicked ()
+        {
+            PlayerPrefs.SetString ("PlayerNickname", inputField.text);
+            PlayerPrefs.Save ();
+
+            GameManager.instance.playerNickName = inputField.text;
+
+            SceneManager.LoadScene ("World1");
+        }
+
     }
-
-    public void OnJoinGameClicked()
-    {
-        PlayerPrefs.SetString("PlayerNickname", inputField.text);
-        PlayerPrefs.Save();
-
-        GameManager.instance.playerNickName = inputField.text;
-
-        SceneManager.LoadScene("World1");
-    }
-
 }

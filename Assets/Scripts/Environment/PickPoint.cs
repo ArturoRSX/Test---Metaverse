@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickPoint : MonoBehaviour
+namespace Metaverse.Game
 {
-
-    void OnTriggerEnter(Collider col)
+    public class PickPoint : MonoBehaviour
     {
-        if (col.CompareTag("LocalPlayer")) {
-            col.GetComponentInParent<WeaponHandler> ().hasWeapon = false;
+
+        void OnTriggerEnter (Collider col)
+        {
+            if (col.CompareTag ("Player")) {
+                if (col.GetComponent<NetworkPlayer> ().isLocal) {
+                    Debug.Log ("Is the local player.");
+                }
+            }
         }
-    }
-    void OnTriggerExit ()
-    {
+        void OnTriggerExit ()
+        {
+
+        }
 
     }
-
 }
