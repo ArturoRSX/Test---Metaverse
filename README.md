@@ -4,6 +4,8 @@ This a Metaverse example for Sumeru Inc.
 Created with
 Unity – 2021.3.3f1
 
+Full Architecture PDF
+
 Assets
 Multiplayer SDK
 • Photon Fusion: High performance, low bandwidth, a lot of built-in features.
