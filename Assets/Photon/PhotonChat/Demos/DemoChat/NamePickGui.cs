@@ -7,6 +7,7 @@
 
 using Metaverse;
 using Metaverse.Character;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +21,7 @@ namespace Photon.Chat.Demo
 
         public ChatGui chatNewComponent;
 
-        public InputField idInput;
+        public TMP_InputField idInput;
 
         public void Start()
         {
